@@ -1,7 +1,7 @@
 import React from "react";
 import bgImg from "../../assets/vector1.png";
 
-const Banner = ({task}) => {
+const Banner = ({task, resolved}) => {
   return (
     
     <div className="max-w-350 mx-auto flex flex-col md:flex-row items-center justify-center gap-10 px-3 lg:px-1">
@@ -34,7 +34,7 @@ const Banner = ({task}) => {
 
           <div className="w-full z-10 text-center text-white space-y-3">
             <h2 className="">Resolved</h2>
-            <span className="text-5xl font-bold">0</span>
+            <span className="text-5xl font-bold">{resolved.length}</span>
           </div>
 
           <img

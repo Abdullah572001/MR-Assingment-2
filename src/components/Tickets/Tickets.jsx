@@ -2,11 +2,19 @@ import React, { use } from "react";
 import Ticket from "./Ticket";
 import Task from "../Task/Task";
 
-const Tickets = ({ ticketsPromise, task, setTask }) => {
+const Tickets = ({ ticketsPromise, task, setTask, resolved, setResolved }) => {
 
-    const tickets = use(ticketsPromise);
+    let tickets = use(ticketsPromise);
     // console.log(tickets);
     // console.log(task)
+    const removeFromTask = (titleRemove) => {
+        const newTask = task.filter(title => title !== titleRemove);
+        setTask(newTask);
+    }
+    const removeFromTickets = (titleRemove) => {
+        const newTickets = tickets.filter(ticket => ticket.issue_title !== titleRemove);
+        tickets = newTickets;
+    }
 
   return (
     <div className="max-w-350 mx-auto px-3 lg:px-0 mt-15">
@@ -26,12 +34,21 @@ const Tickets = ({ ticketsPromise, task, setTask }) => {
             <div className="space-y-3">
                 <h2 className="text-xl font-bold">Task Status</h2>
                 {
-                    task[0] ? task.map((title, index) => <Task key={index} title={title}></Task> ) : <p className="text-gray-400">Select a ticket to add to Task Status</p>
+                    task[0] ? task.map((title, index) => <Task 
+                    key={index} 
+                    title={title}
+                    resolved={resolved}
+                    setResolved={setResolved}
+                    removeFromTask={removeFromTask}
+                    removeFromTickets={removeFromTickets}
+                    ></Task> ) : <p className="text-gray-400">Select a ticket to add to Task Status</p>
                 }
             </div>
             <div className="space-y-3 mt-6">
                 <h2 className="text-xl font-bold">Resolved Task</h2>
-                <p className="text-gray-400">No resolved tasks yet.</p>
+                {
+                    resolved[0] ? resolved.map((title, index) => <p key={index} className="px-3 py-5 bg-[#E0E7FF] rounded">{title}</p> ) : <p className="text-gray-400">No resolved tasks yet.</p>
+                }
             </div>
         </div>
       </div>

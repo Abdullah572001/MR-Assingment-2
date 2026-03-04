@@ -1,10 +1,21 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 
-const Task = ({title}) => {
+const Task = ({title, resolved, setResolved, removeFromTask, removeFromTickets}) => {
+
+    const handleResolved = () => {
+        setResolved([...resolved, title]);
+        removeFromTask(title);
+        removeFromTickets(title);
+        toast("Task marked as resolved")
+    }
+
     return (
         <div className='p-4 bg-white rounded space-y-3'>
             <h2>{title}</h2>
-            <button className='btn w-full bg-[#02A53B]'>Complete</button>
+            <button
+            onClick={handleResolved}
+             className='btn w-full bg-[#02A53B]'>Complete</button>
         </div>
     );
 };
