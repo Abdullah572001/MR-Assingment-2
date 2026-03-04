@@ -11,10 +11,8 @@ const Tickets = ({ ticketsPromise, task, setTask, resolved, setResolved }) => {
         const newTask = task.filter(title => title !== titleRemove);
         setTask(newTask);
     }
-    const removeFromTickets = (titleRemove) => {
-        const newTickets = tickets.filter(ticket => ticket.issue_title !== titleRemove);
-        tickets = newTickets;
-    }
+
+    const newTickets = tickets.filter(ticket => !resolved.includes(ticket.issue_title));
 
   return (
     <div className="max-w-350 mx-auto px-3 lg:px-0 mt-15">
@@ -25,7 +23,8 @@ const Tickets = ({ ticketsPromise, task, setTask, resolved, setResolved }) => {
         {/* tickets card container */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:w-3/4">
             {
-                tickets.map(ticket => <Ticket task={task} setTask={setTask} key={ticket.id} ticket={ticket}></Ticket>)
+                newTickets.map(ticket => <Ticket task={task} setTask={setTask} key={ticket.id} ticket={ticket}></Ticket>)
+                
             }
         </div>
             
@@ -40,7 +39,6 @@ const Tickets = ({ ticketsPromise, task, setTask, resolved, setResolved }) => {
                     resolved={resolved}
                     setResolved={setResolved}
                     removeFromTask={removeFromTask}
-                    removeFromTickets={removeFromTickets}
                     ></Task> ) : <p className="text-gray-400">Select a ticket to add to Task Status</p>
                 }
             </div>

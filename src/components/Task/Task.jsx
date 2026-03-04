@@ -1,12 +1,11 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 
-const Task = ({title, resolved, setResolved, removeFromTask, removeFromTickets}) => {
+const Task = ({title, resolved, setResolved, removeFromTask}) => {
 
     const handleResolved = () => {
         setResolved([...resolved, title]);
         removeFromTask(title);
-        removeFromTickets(title);
         toast("Task marked as resolved")
     }
 

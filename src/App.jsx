@@ -4,6 +4,7 @@ import Banner from "./components/Banner/Banner";
 import Navbar from "./components/Navbar/Navbar";
 import Tickets from "./components/Tickets/Tickets";
 import { ToastContainer, toast } from "react-toastify";
+import Footer from "./components/Footer/Footer";
 
 const ticketsFetch = async () => {
   const res = await fetch("/data.json");
@@ -35,6 +36,9 @@ function App() {
             ticketsPromise={ticketsPromise}
           ></Tickets>
         </Suspense>
+      </div>
+      <div className="bg-black pt-14 pb-6">
+        <Footer></Footer>
       </div>
       <ToastContainer></ToastContainer>
     </>
